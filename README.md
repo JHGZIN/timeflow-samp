@@ -3,3 +3,6 @@ Automatic day and night cycle system for SA-MP. Updates the game time dynamicall
 
 # Dependencies:
  [foreach](https://github.com/karimcambridge/samp-foreach)
+
+
+# Functions:
