@@ -1,8 +1,8 @@
-# timeflow
+# TIMEFLOW
 Automatic day and night cycle system for SA-MP. Updates the game time dynamically, creating a realistic effect.
 
-# Dependencies:
+# DEPENDENCIES
  [foreach](https://github.com/karimcambridge/samp-foreach)
 
-# Gif:
+# GIF
  []()
