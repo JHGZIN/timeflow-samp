@@ -1,14 +1,13 @@
 /*
     ==========================================
     Include: timeflow.inc
-    Autor: JHGZIN
-    Versão: 1.0
-    Descrição: Sistema de ciclo automático de dia e noite para SA-MP.
-               Atualiza o horário do jogo dinamicamente, criando um efeito realista.
+	Author: JHGZIN
+	Version: 1.0 
+	Description: Automatic day and night cycle system for SA-MP. Updates the game time dynamically, creating a realistic effect.    ==========================================
     ==========================================
 */
 
-#if !defined FILTERSCRIPT 
+#if !defined FILTERSCRIPT
 
 #if defined _rCICLE_Included_
 	#endinput
@@ -16,14 +15,12 @@
 
 #define _rCICLE_Included_
 
-#include <a_samp>
-
-#if !defined _FOREACH_INC_TEST
-	#tryinclude <foreach>
+#if !defined _samp_included
+	#tryinclude <a_samp>
 #endif
 
-#if !defined _FOREACH_INC_TEST
-	#tryinclude "foreach"
+#if !defined _samp_included
+	#tryinclude "a_samp"
 #endif
 
 static hour,
@@ -33,38 +30,55 @@ static hour,
 	   PlayerText:text_TimerPlayer[MAX_PLAYERS][9]
 	   ;
 
-#if defined CICLE_OnPlayerConnect
-	forward CICLE_OnPlayerConnect(playerid);
+#if defined CICLE_OnPlayerSpawn
+	forward CICLE_OnPlayerSpawn(playerid);
 #endif
 
 #if defined CICLE_OnGameModeInit
 	forward CICLE_OnGameModeInit();
 #endif
 
-#if defined StartTimer
-	forward StartTimer();
+#if defined CICLE_OnPlayerUpdate
+	forward CICLE_OnPlayerUpdate(playerid);
 #endif
 
+forward StartTimer();
+
 public OnGameModeInit() {
+    new timer = random(12)+1;
+    hour = timer;
+
 	SetTimer("StartTimer", 1000, false);
+
 	#if defined CICLE_OnGameModeInit
 		return CICLE_OnGameModeInit();
 	#else
-		return 1;
+		return true;
 	#endif
 }
 
-public OnPlayerConnect(playerid) {
-	Create_PlayerTextTimer(playerid); 
-	#if defined CICLE_OnPlayerConnect
-		return CICLE_OnPlayerConnect(playerid);
+public OnPlayerSpawn(playerid) {
+	Create_PlayerTextTimer(playerid);
+
+	#if defined CICLE_OnPlayerSpawn
+		return CICLE_OnPlayerSpawn(playerid);
 	#else
-		return 1;
+		return true;
+	#endif
+}
+
+public OnPlayerUpdate(playerid) {
+	new str[11]; format(str, sizeof str, "%02d:%02d", hour, minute);
+	PlayerTextDrawSetString(playerid, text_TimerPlayer[playerid][8], str);
+	#if defined CICLE_OnPlayerUpdate
+		return CICLE_OnPlayerUpdate(playerid);
+	#else
+		return true;
 	#endif
 }
 
 public StartTimer() {
-	if(second >= 5) {
+	if(second >= 4) {
 	    second = 0;
 	    minute ++;
 	}
@@ -76,11 +90,10 @@ public StartTimer() {
 	    hour = 0;
 	    hour ++;
 	}
-	second ++;
     SetTimer("StartTimer", 1000, false);
-	update_PlayerTextTimer(hour, minute);
+    second ++;
 	SetWorldTime(hour);
-	return 1;
+	return true;
 }
 
 stock Create_PlayerTextTimer(playerid) {
@@ -182,7 +195,6 @@ stock Create_PlayerTextTimer(playerid) {
 		PlayerTextDrawSetProportional(playerid, text_TimerPlayer[playerid][8], 1);
 		timer_TextShow[playerid] = true;
 	}
-
     for (new i = 0; i < sizeof text_TimerPlayer[]; i++) PlayerTextDrawShow(playerid, text_TimerPlayer[playerid][i]);
 	return true;
 }
@@ -198,21 +210,13 @@ stock Destroy_PlayerTextTimer(playerid) {
     return true;
 }
 
-stock update_PlayerTextTimer(timerhour = 12, timerminute = 0)	{
-	foreach (new playerid : Player) {
-		new str[11]; format(str, sizeof str, "%02d:%02d", timerhour, timerminute);
-		PlayerTextDrawSetString(playerid, text_TimerPlayer[playerid][8], str);
-	}
-	return true;
-}
-
-#if defined _ALS_OnPlayerConnect
-  #undef OnPlayerConnect
+#if defined _ALS_OnPlayerSpawn
+  #undef OnPlayerSpawn
 #else
-	#define _ALS_OnPlayerConnect
+	#define _ALS_OnPlayerSpawn
 #endif
 
-#define OnPlayerConnect CICLE_OnPlayerConnect
+#define OnPlayerSpawn CICLE_OnPlayerSpawn
 
 #if defined _ALS_OnGameModeInit
   #undef OnGameModeInit
@@ -221,5 +225,13 @@ stock update_PlayerTextTimer(timerhour = 12, timerminute = 0)	{
 #endif
 
 #define OnGameModeInit CICLE_OnGameModeInit
+
+#if defined _ALS_OnPlayerUpdate
+  #undef OnPlayerUpdate
+#else
+	#define _ALS_OnPlayerUpdate
+#endif
+
+#define OnPlayerUpdate CICLE_OnPlayerUpdate
 
 #endif
