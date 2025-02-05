@@ -1,0 +1,15 @@
+../modules/phone/phone_main.inc(30) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "AtualizarMetrosIfood"
+../modules/phone/phone_vars.inc(22) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "CarcacaCelular"
+../modules/dices/player.inc(149) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "E_VENDA_DROGAS"
+../modules/phone/phone_main.inc(22) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "EntregandoPedidoIfood"
+../modules/commands/command_players.inc(17) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "GetIdLooting"
+../modules/phone/phone_main.inc(71) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "MensangesIfoodProk"
+../modules/phone/phone_main.inc(43) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "PosEntregariFood"
+../modules/phone/phone_main.inc(1) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "StatusNoApp"
+../modules/phone/phone_main.inc(24) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "UltimaPosIfood"
+../modules/phone/phone_main.inc(14) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "ValorInseridoIfood"
+../modules/phone/phone_main.inc(92) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "actor_IfoodEntrega"
+../modules/dices/apartment.inc(48) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "e_DICE_COFRE_APE"
+../modules/dices/jobs.inc(25) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "e_MATERIAIS_ILICITOS"
+Pawn compiler 3.2.3664	 	 	Copyright (c) 1997-2016, ITB CompuPhase
+
